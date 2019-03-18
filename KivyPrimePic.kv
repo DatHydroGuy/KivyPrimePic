@@ -1,0 +1,81 @@
+#:import random random.random
+
+<Root>:
+    orientation: 'vertical'
+
+    BoxLayout:
+        id: boxy
+        orientation: 'horizontal'
+        size_hint_x: None
+        size_hint_y: None
+        width: 130
+        height: 30
+
+        TextInput:
+            id: my_text_input
+            font_size: 16
+            size_hint_x: None
+            size_hint_y: None
+            width: 100
+            height: 30
+            text: '1'
+        Button:
+            id: go_button
+            font_size: 16
+            size_hint_x: None
+            size_hint_y: None
+            width: 30
+            height: 30
+            text: 'Go'
+            on_press: root.stuff(my_text_input.text)
+        Button:
+            id: down_button
+            font_size: 16
+            size_hint_x: None
+            size_hint_y: None
+            width: 30
+            height: 30
+            text: '<'
+            on_press:
+                my_text_input.text = str(max(int(my_text_input.text) - 1, 0))
+                root.stuff(my_text_input.text)
+        Button:
+            id: up_button
+            font_size: 16
+            size_hint_x: None
+            size_hint_y: None
+            width: 30
+            height: 30
+            text: '>'
+            on_press:
+                my_text_input.text = str(min(int(my_text_input.text) + 1, 10000))
+                root.stuff(my_text_input.text)
+        Widget:
+            size_hint_x: None
+            size_hint_y: None
+            width: root.width - 500
+        Label:
+            id: factors_label
+            font_size: 16
+            size_hint_x: None
+            size_hint_y: None
+            width: 300
+            height: 30
+            halign: 'right'
+            text_size: self.size
+            text: '1'
+
+    FloatLayout:
+        id: floaty
+
+<AnimRect>:
+    size_hint: None, None
+    pos_hint_x: 0
+    pos_hint_y: 0
+    colour: 1.0, 0.0, 0.0, 1.0
+    canvas.before:
+        Color:
+            rgba: self.colour  # random(), random(), random(), 1
+        Ellipse:
+            pos: self.pos
+            size: self.size
